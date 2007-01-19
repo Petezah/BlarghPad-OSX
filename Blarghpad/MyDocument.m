@@ -3,7 +3,7 @@
 //  Blarghpad
 //
 //  Created by Pete Dunshee on 1/16/07.
-//  Copyright __MyCompanyName__ 2007 . All rights reserved.
+//  Copyright Pete Dunshee 2007 . All rights reserved.
 //
 
 #import "MyDocument.h"
@@ -13,7 +13,8 @@
 - (id)init
 {
     self = [super init];
-    if (self) {
+    if (self) 
+	{
     
         // Add your subclass-specific initialization here.
         // If an error occurs here, send a [self release] message and return nil.
