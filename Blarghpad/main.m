@@ -3,7 +3,7 @@
 //  Blarghpad
 //
 //  Created by Pete Dunshee on 1/16/07.
-//  Copyright __MyCompanyName__ 2007 . All rights reserved.
+//  Copyright Pete Dunshee 2007 . All rights reserved.
 //
 
 #import <Cocoa/Cocoa.h>
