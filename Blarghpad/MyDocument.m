@@ -7,6 +7,7 @@
 //
 
 #import "MyDocument.h"
+#import "MyWindowController.h"
 
 @implementation MyDocument
 
@@ -18,58 +19,49 @@
     
         // Add your subclass-specific initialization here.
         // If an error occurs here, send a [self release] message and return nil.
+		
+		dataFromFile = [[NSData alloc] init];
+		needsNewTab = TRUE;
     
     }
     return self;
 }
 
-- (NSString *)windowNibName
+- (void)makeWindowControllers
 {
-    // Override returning the nib file name of the document
-    // If you need to use a subclass of NSWindowController or if your document supports multiple NSWindowControllers, you should remove this method and override -makeWindowControllers instead.
-    return @"MyDocument";
-}
-
-- (void)windowControllerDidLoadNib:(NSWindowController *) aController
-{
-    [super windowControllerDidLoadNib:aController];
-
-    if (dataFromFile)
-    {
-        [self loadtextViewWithData:dataFromFile];
-        [dataFromFile release];
-        dataFromFile = nil;
-    }
-    
-    [textView setFont: [NSFont userFixedPitchFontOfSize: 12]];
-    [textView setAllowsUndo:YES];
+	MyWindowController *controller = [MyWindowController instance];
+	[self addWindowController: controller];
 }
 
 
 - (NSData *)dataRepresentationOfType:(NSString *)aType
 {
-	return [textView RTFFromRange: NSMakeRange(0, [[textView string] length]) ];
+	return dataFromFile;
+	//return [textView RTFFromRange: NSMakeRange(0, [[textView string] length]) ];
 }
 
 - (BOOL)loadDataRepresentation:(NSData *)data ofType:(NSString *)aType
 {
-    if(textView)
-    {
-        [self loadtextViewWithData:data];
-    }
-    else
-    {
+//    if(textView)
+//    {
+//        [self loadtextViewWithData:data];
+//    }
+//    else
+//    {
         dataFromFile = [data retain];
-    }
+//    }
     
     return YES;
 }
 
-- (void)loadtextViewWithData:(NSData *)data
+- (void)setData:(NSData *)data
 {
-    [textView replaceCharactersInRange:
-                            NSMakeRange(0, [[textView string] length])
-                            withRTF:data];
+	dataFromFile = [data retain];
+}
+
+- (NSData *)getData
+{
+	return dataFromFile;
 }
 
 - (void)setEdited:(BOOL)edited
@@ -81,6 +73,26 @@
 - (BOOL)isDocumentEdited
 {
     return modified;
+}
+
+- (void)setDocumentIndex:(int)index
+{
+	documentIndex = index;
+}
+
+- (int)getDocumentIndex
+{
+	return documentIndex;
+}
+
+- (void)setNeedsNewTab:(BOOL)state
+{
+	needsNewTab = state;
+}
+
+- (BOOL)needsNewTab
+{
+	return needsNewTab;
 }
 
 @end
