@@ -34,6 +34,7 @@
 		8D15AC370486D014006FF6A4 /* Blarghpad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Blarghpad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F732760C0B6200AB0020CDF7 /* MyWindowController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MyWindowController.m; sourceTree = "<group>"; };
 		F732760D0B6200AB0020CDF7 /* MyWindowController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MyWindowController.h; sourceTree = "<group>"; };
+		F7CFBB720B633DD000169867 /* Blarghpad-current.dmg */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Blarghpad-current.dmg"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +70,7 @@
 		19C28FB0FE9D524F11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
+				F7CFBB720B633DD000169867 /* Blarghpad-current.dmg */,
 				8D15AC370486D014006FF6A4 /* Blarghpad.app */,
 			);
 			name = Products;
@@ -137,6 +139,7 @@
 				8D15AC2B0486D014006FF6A4 /* Resources */,
 				8D15AC300486D014006FF6A4 /* Sources */,
 				8D15AC330486D014006FF6A4 /* Frameworks */,
+				F7CFBB160B63390200169867 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -176,6 +179,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		F7CFBB160B63390200169867 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 12;
+			files = (
+			);
+			inputPaths = (
+				"$(TARGET_BUILD_DIR)/$(TARGET_NAME).app/Contents/MacOS/$(TARGET_NAME)",
+			);
+			outputPaths = (
+				"./$(TARGET_NAME)-current.dmg",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "rm -f ./$TARGET_NAME-current.dmg\nhdiutil create -srcfolder $TARGET_BUILD_DIR/$TARGET_NAME.app ./$TARGET_NAME-current.dmg\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8D15AC300486D014006FF6A4 /* Sources */ = {

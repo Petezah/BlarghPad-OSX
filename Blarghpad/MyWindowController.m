@@ -69,8 +69,17 @@ static MyWindowController *windowControllerInstance = nil;
 			{
 				[[tabView tabViewItemAtIndex:0] setIdentifier: currentDoc];
 			}
-				
-			[currentDoc setDocumentIndex: numDocuments];
+			
+			// I can't seem to get it to give me a valid empty document any other way
+			[textView replaceCharactersInRange:
+				NSMakeRange(0, [[textView string] length])
+				withString: @""];
+			[currentDoc setData: 
+				[textView RTFFromRange: NSMakeRange(0, [[textView string] length]) ]
+				];			[currentDoc setDocumentIndex: numDocuments];
+			//
+			
+			// already created a tab for this document
 			[currentDoc setNeedsNewTab:FALSE];
 			numDocuments ++;
 		}

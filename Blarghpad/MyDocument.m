@@ -20,9 +20,8 @@
         // Add your subclass-specific initialization here.
         // If an error occurs here, send a [self release] message and return nil.
 		
-		dataFromFile = [[NSData alloc] init];
-		needsNewTab = TRUE;
-    
+
+		needsNewTab = TRUE;    
     }
     return self;
 }
@@ -37,19 +36,11 @@
 - (NSData *)dataRepresentationOfType:(NSString *)aType
 {
 	return dataFromFile;
-	//return [textView RTFFromRange: NSMakeRange(0, [[textView string] length]) ];
 }
 
 - (BOOL)loadDataRepresentation:(NSData *)data ofType:(NSString *)aType
 {
-//    if(textView)
-//    {
-//        [self loadtextViewWithData:data];
-//    }
-//    else
-//    {
-        dataFromFile = [data retain];
-//    }
+	dataFromFile = [data retain];
     
     return YES;
 }
