@@ -62,6 +62,7 @@ static MyWindowController *windowControllerInstance = nil;
 				[tab setLabel:[currentDoc displayName]];
 				[tab setView: [[tabView tabViewItemAtIndex:0] view]];
 				[tab setIdentifier: currentDoc];
+				[currentDoc setTabView:tabView withOwner:tab];
 				[tabView addTabViewItem: tab];
 				[tabView selectTabViewItem: tab];
 			}
@@ -105,12 +106,30 @@ static MyWindowController *windowControllerInstance = nil;
 	NSTabViewItem *tab = [tabView tabViewItemAtIndex: 0];
 	[tab setIdentifier:mydoc];
 	[tab setLabel:[mydoc displayName] ];
+	[mydoc setTabView:tabView withOwner:tab];
 }
 
+- (void)closeCurrentDocument
+{
+	NSTabViewItem *pTab = [tabView selectedTabViewItem];
+	MyDocument *pDoc = (MyDocument*)[pTab identifier];
+	[pDoc close];
+	[tabView removeTabViewItem: pTab];
+}
+
+// delegate methods
 - (void)tabView:(NSTabView *)tabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem
 {
 	MyDocument *mydoc = [tabViewItem identifier];
 	[mydoc addWindowController: self];
+}
+
+- (void)textDidChange:(NSNotification *)aNotification
+{
+	MyDocument* mydoc = (MyDocument*)[self document];
+
+	[mydoc setEdited: YES];
+	[self setDocumentEdited: YES];
 }
 
 @end

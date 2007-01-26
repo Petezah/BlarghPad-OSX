@@ -86,4 +86,18 @@
 	return needsNewTab;
 }
 
+- (void)setTabView:(NSTabView*)view withOwner:(NSTabViewItem*)owner
+{
+	tabView = view;
+	tabOwner = owner;
+}
+
+- (void)close
+{
+	MyWindowController *controller = [MyWindowController instance];
+	[self removeWindowController: controller];
+	
+	[super close];
+}
+
 @end

@@ -20,5 +20,6 @@
 - (void)loadtextViewWithData:(NSData *)data;
 - (void)setNumDocuments:(int)num;
 - (void)setTabAtIndex:(int)index withDocument:(NSDocument*)doc;
+- (void)closeCurrentDocument;
 
 @end

@@ -16,13 +16,17 @@
 	BOOL needsNewTab;
     
     NSData *dataFromFile;
+	NSTabView	  *tabView;
+	NSTabViewItem *tabOwner;
 	int documentIndex;
 }
+- (void)setEdited:(BOOL)edited;
 - (void)setData:(NSData *)data;
 - (NSData *)getData;
 - (void)setDocumentIndex:(int)index;
 - (int)getDocumentIndex;
 - (void)setNeedsNewTab:(BOOL)state;
 - (BOOL)needsNewTab;
+- (void)setTabView:(NSTabView*)view withOwner:(NSTabViewItem*)owner;
 
 @end

@@ -15,6 +15,7 @@
 		8D15AC320486D014006FF6A4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A37F4B0FDCFA73011CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D15AC340486D014006FF6A4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
 		F732760E0B6200AB0020CDF7 /* MyWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = F732760C0B6200AB0020CDF7 /* MyWindowController.m */; };
+		F76D67E90B69DF060098565B /* MyDocumentController.m in Sources */ = {isa = PBXBuildFile; fileRef = F76D67E80B69DF060098565B /* MyDocumentController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,8 @@
 		8D15AC370486D014006FF6A4 /* Blarghpad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Blarghpad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F732760C0B6200AB0020CDF7 /* MyWindowController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MyWindowController.m; sourceTree = "<group>"; };
 		F732760D0B6200AB0020CDF7 /* MyWindowController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MyWindowController.h; sourceTree = "<group>"; };
+		F76D67E70B69DF060098565B /* MyDocumentController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MyDocumentController.h; sourceTree = "<group>"; };
+		F76D67E80B69DF060098565B /* MyDocumentController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MyDocumentController.m; sourceTree = "<group>"; };
 		F7CFBB720B633DD000169867 /* Blarghpad-current.dmg */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Blarghpad-current.dmg"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -95,6 +98,8 @@
 				F732760C0B6200AB0020CDF7 /* MyWindowController.m */,
 				2A37F4AEFDCFA73011CA2CEA /* MyDocument.h */,
 				2A37F4ACFDCFA73011CA2CEA /* MyDocument.m */,
+				F76D67E70B69DF060098565B /* MyDocumentController.h */,
+				F76D67E80B69DF060098565B /* MyDocumentController.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -206,6 +211,7 @@
 				8D15AC310486D014006FF6A4 /* MyDocument.m in Sources */,
 				8D15AC320486D014006FF6A4 /* main.m in Sources */,
 				F732760E0B6200AB0020CDF7 /* MyWindowController.m in Sources */,
+				F76D67E90B69DF060098565B /* MyDocumentController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
