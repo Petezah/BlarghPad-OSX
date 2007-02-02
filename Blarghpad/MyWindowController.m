@@ -68,17 +68,23 @@ static MyWindowController *windowControllerInstance = nil;
 			}
 			else
 			{
+				[currentDoc setTabView:tabView withOwner: [tabView tabViewItemAtIndex:0] ];
 				[[tabView tabViewItemAtIndex:0] setIdentifier: currentDoc];
 			}
 			
-			// I can't seem to get it to give me a valid empty document any other way
-			[textView replaceCharactersInRange:
-				NSMakeRange(0, [[textView string] length])
-				withString: @""];
-			[currentDoc setData: 
-				[textView RTFFromRange: NSMakeRange(0, [[textView string] length]) ]
-				];			[currentDoc setDocumentIndex: numDocuments];
-			//
+			if ([currentDoc needsNewData])
+			{
+				// I can't seem to get it to give me a valid empty document any other way
+				[textView replaceCharactersInRange:
+					NSMakeRange(0, [[textView string] length])
+					withString: @""];
+				[currentDoc setData: 
+					[textView RTFFromRange: NSMakeRange(0, [[textView string] length]) ]
+					];			[currentDoc setDocumentIndex: numDocuments];
+				//
+				
+				[currentDoc setNeedsNewData: FALSE];
+			}
 			
 			// already created a tab for this document
 			[currentDoc setNeedsNewTab:FALSE];
@@ -113,8 +119,38 @@ static MyWindowController *windowControllerInstance = nil;
 {
 	NSTabViewItem *pTab = [tabView selectedTabViewItem];
 	MyDocument *pDoc = (MyDocument*)[pTab identifier];
-	[pDoc close];
-	[tabView removeTabViewItem: pTab];
+
+	// this will do the necessary logic to ask the user
+	// if the document should be saved, etc, before closing
+	[pDoc canCloseDocumentWithDelegate:self
+		shouldCloseSelector:@selector(document:shouldClose:contextInfo:)
+		contextInfo:NULL];
+}
+
+// this will be called due to (void)closeCurrentDocument;
+// if the user said it was okay to close the document, shouldClose will be YES
+- (void) document:(NSDocument*)doc shouldClose:(BOOL)shouldClose contextInfo:(void*)contextInfo
+{
+	if (YES == shouldClose) 
+	{
+		MyDocument* mydoc = (MyDocument*)doc;
+		NSTabViewItem* pTab = [mydoc getTabOwner];
+		[doc close];
+		[tabView removeTabViewItem: pTab];
+	}
+}
+
+- (void)syncDocumentWithCurrent: (NSDocument*)doc;
+{
+	if ([self document] == doc) // if they are the same document
+	{
+		// get the contents of the textView into the document
+		MyDocument* currentDoc = (MyDocument*)[self document];
+		[currentDoc setData: 
+				[textView RTFFromRange: NSMakeRange(0, [[textView string] length]) ]
+				];
+
+	}
 }
 
 // delegate methods
@@ -129,7 +165,13 @@ static MyWindowController *windowControllerInstance = nil;
 	MyDocument* mydoc = (MyDocument*)[self document];
 
 	[mydoc setEdited: YES];
-	[self setDocumentEdited: YES];
 }
+
+/*
+- (BOOL)windowShouldClose:(id)sender
+{
+
+}
+*/
 
 @end

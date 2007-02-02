@@ -22,6 +22,7 @@
 		
 
 		needsNewTab = TRUE;    
+		needsNewData = TRUE;
     }
     return self;
 }
@@ -35,12 +36,17 @@
 
 - (NSData *)dataRepresentationOfType:(NSString *)aType
 {
+	// sync the document, if this one is the current one
+	[[MyWindowController instance] syncDocumentWithCurrent: self];
+	[self setEdited: NO];
+
 	return dataFromFile;
 }
 
 - (BOOL)loadDataRepresentation:(NSData *)data ofType:(NSString *)aType
 {
 	dataFromFile = [data retain];
+	needsNewData = FALSE;
     
     return YES;
 }
@@ -57,8 +63,8 @@
 
 - (void)setEdited:(BOOL)edited
 {
+	[[MyWindowController instance] setDocumentEdited: edited];
     modified = edited;
-    [window setDocumentEdited:edited];
 }
 
 - (BOOL)isDocumentEdited
@@ -86,10 +92,25 @@
 	return needsNewTab;
 }
 
+- (void)setNeedsNewData:(BOOL)state
+{
+	needsNewData = state;
+}
+
+- (BOOL)needsNewData
+{
+	return needsNewData;
+}
+
 - (void)setTabView:(NSTabView*)view withOwner:(NSTabViewItem*)owner
 {
 	tabView = view;
 	tabOwner = owner;
+}
+
+- (NSTabViewItem*)getTabOwner
+{
+	return tabOwner;
 }
 
 - (void)close

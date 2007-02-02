@@ -14,6 +14,7 @@
     
     BOOL modified;
 	BOOL needsNewTab;
+	BOOL needsNewData;
     
     NSData *dataFromFile;
 	NSTabView	  *tabView;
@@ -27,6 +28,9 @@
 - (int)getDocumentIndex;
 - (void)setNeedsNewTab:(BOOL)state;
 - (BOOL)needsNewTab;
+- (void)setNeedsNewData:(BOOL)state;
+- (BOOL)needsNewData;
 - (void)setTabView:(NSTabView*)view withOwner:(NSTabViewItem*)owner;
+- (NSTabViewItem*)getTabOwner;
 
 @end

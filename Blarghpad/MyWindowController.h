@@ -21,5 +21,6 @@
 - (void)setNumDocuments:(int)num;
 - (void)setTabAtIndex:(int)index withDocument:(NSDocument*)doc;
 - (void)closeCurrentDocument;
+- (void)syncDocumentWithCurrent: (NSDocument*)doc;
 
 @end
